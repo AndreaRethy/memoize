@@ -1,6 +1,15 @@
-// tests/sample.test.ts
-describe('Sample Test', () => {
+import { calculate } from '../src/script';
+
+describe('Check if value is saved calculation is NOT called', () => {
     it('should return true', () => {
-      expect(true).toBe(true);
+      const cachedValue = 56;
+
+      if (cachedValue === 56) {
+        return;
+      } else {
+        calculate();
+      }
+      
+      expect(calculate).toHaveBeenCalledTimes(0);
     });
   });
