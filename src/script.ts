@@ -1,25 +1,23 @@
-let cachedValue: number | null = null;
-let result: number | null = null;
+let cachedValue: number | null;
+let result: number | null;
 let count: number = 0;
 
 function calculateDouble(n: number): number | null {
-  console.log(`calculateDouble called with ${n}`);
   if (cachedValue === n) {
-    console.log('Returning cached result');
+    console.log(`Returning cached result for ${n}: ${result}`);
     return result;
   } else {
-    console.log('Calculating new result');
+    console.log('No cached result yet. Calculating new result');
     calculate(n);
     return result;
   }
 }
 
 function calculate(n: number): void {
-  console.log(`calculate called with ${n}`);
+  console.log(`Calculate called with ${n}`);
   count ++;
   result = 2 * n;
   cachedValue = n;
-  console.log(result);
   console.log(`Result is ${result}`);
 }
 
