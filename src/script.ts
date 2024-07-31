@@ -1,5 +1,5 @@
 // Create a memoize funtion that takes in any function as an argument
-const memoize = (fn: Function) => {
+function memoize(fn: Function) {
   const cache: {[key: string]: any} = {};
 
   return (...args: any[]) => {
@@ -14,9 +14,17 @@ const memoize = (fn: Function) => {
   }
 }
 
+let count = 0;
+
 //Example function to test memoize
 function calculateDouble(n: number): number {
+  count ++;
   return 2 * n;
 }
 
-export { calculateDouble, memoize };
+// Create a function for testing purposes
+function currentCount(): number {
+  return count;
+}
+
+export { calculateDouble, memoize, currentCount };
