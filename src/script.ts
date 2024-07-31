@@ -1,28 +1,22 @@
-let cachedValue: number | null;
-let result: number | null;
-let count: number = 0;
+// Create a memoize funtion that takes in any function as an argument
+const memoize = (fn: Function) => {
+  const cache: {[key: string]: any} = {};
 
-function calculateDouble(n: number): number | null {
-  if (cachedValue === n) {
-    console.log(`Returning cached result for ${n}: ${result}`);
-    return result;
-  } else {
-    console.log('No cached result yet. Calculating new result');
-    calculate(n);
+  return (...args: any[]) => {
+    let key: string = args.toString()
+    if (key in cache) {
+      console.log(cache);
+      return cache[key];
+    }
+    const result = fn(...args);
+    cache[key] = result;
     return result;
   }
 }
 
-function calculate(n: number): void {
-  console.log(`Calculate called with ${n}`);
-  count ++;
-  result = 2 * n;
-  cachedValue = n;
-  console.log(`Result is ${result}`);
+//Example function to test memoize
+function calculateDouble(n: number): number {
+  return 2 * n;
 }
 
-function currentCount(): number {
-  return count;
-}
-
-export { calculateDouble, calculate, currentCount };
+export { calculateDouble, memoize };
