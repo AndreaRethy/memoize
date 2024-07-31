@@ -5,11 +5,12 @@ function memoize(fn: Function) {
   return (...args: any[]) => {
     let key: string = args.toString()
     if (key in cache) {
-      console.log(cache);
+      console.log(`result from cache: ${cache[key]}`);
       return cache[key];
     }
     const result = fn(...args);
     cache[key] = result;
+    console.log(`function called with argument: ${args} and result is ${result}`);
     return result;
   }
 }
